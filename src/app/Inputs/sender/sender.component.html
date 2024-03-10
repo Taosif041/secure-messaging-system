@@ -1,0 +1,10 @@
+<!-- sender.component.html -->
+<div>
+  <label for="messageInput">Enter Your Message:</label>
+  <input type="text" id="messageInput" [(ngModel)]="messageInput" required>
+</div>
+<div>
+  <label for="messageKey">Key:</label>
+  <input type="text" id="messageKey" [(ngModel)]="messageKey" required>
+</div>
+<button (click)="submitMessage()">Submit</button>
