@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.horizontal-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.component {
+  flex: 1;
+}
+
+.text1 {
+  margin-left: 20px; /* Adjust as needed */
+}
+mat-grid-tile {
+  background: lightblue;
+}

@@ -13,10 +13,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DisplayComponent } from './Inputs/display/display.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { ShowComponent } from './Outputs/show/show.component';
 import { ErrorComponent } from './Outputs/error/error.component';
+import { Showg1Component } from './Outputs/showg1/showg1.component';
 
 
 
@@ -29,6 +32,7 @@ const routes: Routes = [
   { path: 'display', component: DisplayComponent },
   { path: 'show', component: ShowComponent },
   { path: 'error', component: ErrorComponent },
+  { path: 'showg1', component: Showg1Component },
   { path: '', redirectTo: '/sender', pathMatch: 'full' },
   { path: '**', redirectTo: '/sender', pathMatch: 'full' }
 ];
@@ -42,14 +46,16 @@ const routes: Routes = [
     NavbarComponent,
     DisplayComponent,
     ShowComponent,
-    ErrorComponent
+    ErrorComponent,
+    Showg1Component
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
     BrowserAnimationsModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../Services/data.service';
 import { ValidateService } from '../../Services/validate.service';
+import { StoryService } from '../../Services/story.service';
 
 import * as CryptoJS from 'crypto-js';
 
@@ -35,7 +36,7 @@ export class DisplayComponent implements OnInit {
   encryptedMessageText2: string = '';
 
 
-  constructor(private dataService: DataService, private validateService: ValidateService) { }
+  constructor(private dataService: DataService, private validateService: ValidateService, private storyService: StoryService) { }
 
   ngOnInit() {
     this.generateTexts();
@@ -49,7 +50,7 @@ export class DisplayComponent implements OnInit {
   generateTexts() {
     this.lastMessage = this.dataService.getLastMessage();
     this.text1=  this.lastMessage.message;
-    this.text2=  this.text1.length+' 12345 '+ this.text1.length+this.text1.substring(0,this.text1.length/2)+this.text1.length+' 56789 '+this.text1.length+  + ' '+ this.text1.substring(this.text1.length/2, this.text1.length) +  + ' '+ this.text1.length;
+    this.text2=  this.text2 = this.storyService.getRandomStory();
     this.text3=  this.text1 + ' '+ this.text2;
   }
 

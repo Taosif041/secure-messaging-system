@@ -25,7 +25,7 @@
         </div>
       </cdk-accordion-item>
 
-      <!-- H2: Encrypted Message Section -->
+      <!-- H2: Encrypted Message Section
     <cdk-accordion-item #encryptedMessageAccordionItemText2="cdkAccordionItem" class="example-accordion-item">
         <div class="example-accordion-item-header" (click)="encryptedMessageAccordionItemText2.toggle()">
           H2: Encrypted Message for Text2
@@ -36,10 +36,10 @@
         <div class="example-accordion-item-body" [style.display]="encryptedMessageAccordionItemText2.expanded ? '' : 'none'">
           <p>{{ encryptedMessageText2 }}</p>
         </div>
-      </cdk-accordion-item>
+      </cdk-accordion-item> -->
     
       <!-- Unique Words Section for Text2 -->
-    <cdk-accordion-item #uniqueWordsAccordionItemText2="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="uniqueWordsAccordionItemText2.expanded">
+    <!-- <cdk-accordion-item #uniqueWordsAccordionItemText2="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="uniqueWordsAccordionItemText2.expanded">
       <div class="example-accordion-item-header" (click)="uniqueWordsAccordionItemText2.toggle()">
         Unique Words for Text2
         <span class="example-accordion-item-description">
@@ -51,10 +51,10 @@
           <li *ngFor="let word of uniqueWordsText2">{{ word }}</li>
         </ul>
       </div>
-    </cdk-accordion-item>
+    </cdk-accordion-item> -->
     
     <!-- G2 Matrix Section -->
-    <cdk-accordion-item #matrixAccordionItemText2="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="matrixAccordionItemText2.expanded">
+    <!-- <cdk-accordion-item #matrixAccordionItemText2="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="matrixAccordionItemText2.expanded">
       <div class="example-accordion-item-header" (click)="matrixAccordionItemText2.toggle()">
         G2 Matrix for Text2
         <span class="example-accordion-item-description">
@@ -79,11 +79,11 @@
           </table>
         </div>
       </div>
-    </cdk-accordion-item>
+    </cdk-accordion-item> -->
     
     
 
-    <!-- G1 Matrix Section -->
+    <!-- G1 Matrix Section
     <cdk-accordion-item #matrixAccordionItem="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="matrixAccordionItem.expanded">
         <div class="example-accordion-item-header" (click)="matrixAccordionItem.toggle()">
           G1 Matrix for Text1
@@ -111,7 +111,7 @@
         </div>
       </cdk-accordion-item>
 
-      <!-- Unique Words Section -->
+      Unique Words Section
     <cdk-accordion-item #uniqueWordsAccordionItem="cdkAccordionItem" class="example-accordion-item" [attr.aria-expanded]="uniqueWordsAccordionItem.expanded">
         <div class="example-accordion-item-header" (click)="uniqueWordsAccordionItem.toggle()">
           Unique Words for Text1
@@ -128,7 +128,7 @@
 
 
     
-  <!-- Encrypted Message Section -->
+  Encrypted Message Section
   <cdk-accordion-item #encryptedMessageAccordionItem="cdkAccordionItem" class="example-accordion-item">
     <div class="example-accordion-item-header" (click)="encryptedMessageAccordionItem.toggle()">
       H1: Encrypted Message for Text1
@@ -148,7 +148,7 @@
   
     
 
-    <!-- Sent Message Section -->
+    <!-- Sent Message Section
     <cdk-accordion-item #sentMessageAccordionItem="cdkAccordionItem" class="example-accordion-item-text1">
         <div class="example-accordion-item-header-text1" (click)="sentMessageAccordionItem.toggle()">
           Text1
@@ -159,11 +159,29 @@
         <div class="example-accordion-item-body-text1" [style.display]="sentMessageAccordionItem.expanded ? '' : 'none'">
           <p>{{ text1 }}</p>
         </div>
-    </cdk-accordion-item>
-      
+      </cdk-accordion-item> 
+    -->
+</cdk-accordion>
+
+
+<div class="example-accordion-item-body">
+  <div class="container matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Matrix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let word of uniqueWordsText2">
+          <td>{{ word }}</td>
+          <td>{{ matrix_g2[word].join(' ') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
   
-    
-  
-  
-  </cdk-accordion>
-  
+   
+  <button (click)="navigateToShowG1()">Next</button>
