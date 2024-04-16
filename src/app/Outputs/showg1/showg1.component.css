@@ -1,20 +1,12 @@
-.container {
-  display: flex;
-  justify-content: space-between;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+  gap: 10px; /* Gap between grid items */
+  margin: 10px;
 }
 
-.horizontal-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.component {
-  flex: 1;
-}
-
-.text1 {
-  margin-left: 20px; /* Adjust as needed */
-}
-mat-grid-tile {
-  background: lightblue;
+.grid-item {
+  background-color: lightblue;
+  border: 1px solid #ccc; /* Border for each grid item */
+  padding: 10px; /* Padding for each grid item */
 }

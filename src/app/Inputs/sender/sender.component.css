@@ -2,31 +2,36 @@
 
 /* Center the text boxes */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-  }
-  
-  /* Style the text boxes */
-  input[type="text"] {
-    width: 300px; /* Adjust the width as needed */
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Style the submit button */
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Adjust the height as needed */
+  width: 50vw;
+  margin-left: 300px;
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #7d96b1;
+}
+
+/* Style the text boxes */
+input[type="text"] {
+  width: 300px; /* Adjust the width as needed */
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style the submit button */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

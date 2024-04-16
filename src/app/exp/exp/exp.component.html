@@ -1,0 +1,16 @@
+<!-- my-component.component.html -->
+
+<div>
+  <label for="prompt">Enter Prompt:</label>
+  <input
+    type="text"
+    id="prompt"
+    [(ngModel)]="prompt"
+    placeholder="Write a story about..."
+  />
+  <button (click)="generateText()">Generate Text</button>
+</div>
+
+<div *ngIf="prompt.length > 0 && generatedText">
+  <p>Generated Text: {{ generatedText }}</p>
+</div>

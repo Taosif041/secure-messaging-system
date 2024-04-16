@@ -4,18 +4,20 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidateService {
   dataSets: {
-    text1: string[];
-    key: string[];
-    encrypted1: string[];
-    text2: string[];
-    encrypted2: string[];
+    text1: string;
+    key: string;
+    encrypted1: string;
+    text2: string;
+    encrypted2: string;
+    uniqueString1: string;
+    uniqueString2: string;
   }[] = [];
 
-  constructor() { }
+  constructor() {}
 
   setDataSets(dataSets: any[]) {
     this.dataSets = dataSets;

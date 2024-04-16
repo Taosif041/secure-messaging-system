@@ -1,85 +1,86 @@
 /* display.component.css */
 .container {
-    margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .unique-words {
-    background-color: #eaf7eb; /* Light green */
+  background-color: #eaf7eb; /* Light green */
 }
 
 .matrix {
-    background-color: #f7ebf0; /* Light pink */
+  background-color: #f7ebf0; /* Light pink */
 }
 
 table {
-    width: 100%;
-    /* border-collapse: collapse; */
+  width: 100%;
+  /* border-collapse: collapse; */
 }
 
-th, td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
+th,
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 tr:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 .example-accordion {
-    display: block;
-    max-width: 900px;
+  display: block;
+  max-width: 900px;
 }
-  
+
 .example-accordion-item {
-    display: block;
-    border: solid 1px #ccc;
+  display: block;
+  border: solid 1px #ccc;
 }
-  
-  .example-accordion-item + .example-accordion-item {
-    border-top: none;
-  }
-  
-  .example-accordion-item-header {
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-  }
-  
-  .example-accordion-item-description {
-    font-size: 0.85em;
-    color: #411919;
-  }
-  
-  .example-accordion-item-header,
-  .example-accordion-item-body {
-    padding: 16px;
-  }
-  
-  .example-accordion-item-header:hover {
-    cursor: pointer;
-    background-color: #4370ac;
-  }
-  
-  .example-accordion-item:first-child {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-  
-  .example-accordion-item:last-child {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+
+.example-accordion-item + .example-accordion-item {
+  border-top: none;
 }
-  
+
+.example-accordion-item-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.example-accordion-item-description {
+  font-size: 0.85em;
+  color: #411919;
+}
+
+.example-accordion-item-header,
+.example-accordion-item-body {
+  padding: 16px;
+}
+
+.example-accordion-item-header:hover {
+  cursor: pointer;
+  background-color: #4370ac;
+}
+
+.example-accordion-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.example-accordion-item:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
 /* display.component.css */
 
 .example-accordion {
@@ -120,7 +121,8 @@ tr:hover {
   border-collapse: collapse;
 }
 
-.container.matrix th, .container.matrix td {
+.container.matrix th,
+.container.matrix td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -129,7 +131,6 @@ tr:hover {
 .container.matrix th {
   background-color: #f2f2f2;
 }
-
 
 .example-accordion-item5 {
   background-color: #1c722e; /* Light gray background */
@@ -161,10 +162,29 @@ tr:hover {
 .example-accordion-item-header-text1 {
   padding: 10px; /* Padding inside the accordion item header */
   cursor: pointer; /* Cursor style when hovering over the header */
-  background-color: #4CAF50; /* Green background color */
+  background-color: #4caf50; /* Green background color */
   color: white; /* White text color */
 }
 
 .example-accordion-item-body-text1 {
   padding: 10px; /* Padding inside the accordion item body */
+}
+/* Assuming your component's CSS file is display.component.css */
+.example-button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+.example-button:hover {
+  background-color: #45a049; /* Darker green */
 }

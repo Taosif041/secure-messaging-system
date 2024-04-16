@@ -1,43 +1,42 @@
-<mat-grid-list cols="3" rowHeight="1:2"> <!-- Adjust the height as needed -->
-    <!-- G1 Matrix -->
-    <mat-grid-tile>
-      <div class="component">
-        <b>G1 Matrix: </b> 
-        <div class="container matrix">
-          <table>
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Matrix</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let word of uniqueWordsText1">
-                <td>{{ word }}</td>
-                <td>{{ matrix_g[word].join(' ') }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<div class="grid-container">
+  <!-- G1 Matrix -->
+  <div class="grid-item">
+    <div class="component">
+      <b>G1 Matrix: </b>
+      <div class="container matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>Matrix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let word of uniqueWordsText1">
+              <td>{{ word }}</td>
+              <td>{{ matrix_g[word].join(" ") }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </mat-grid-tile>
-  
-    <!-- Unique Words -->
-    <mat-grid-tile>
-      <div class="component">
-        <b>X1: </b> 
-        <ul>
-          <li *ngFor="let word of uniqueWordsText1">{{ word }}</li>
-        </ul>      
-      </div>
-    </mat-grid-tile>
-  
-    <!-- Text1 -->
-    <mat-grid-tile>
-      <div class="component text1">
-        <b>Text1: </b>
-        <p>{{ text1 }}</p> 
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-  
+    </div>
+  </div>
+
+  <!-- Unique Words -->
+  <div class="grid-item">
+    <div class="component">
+      <b>X1: </b>
+      <ul>
+        <li *ngFor="let word of uniqueWordsText1">{{ word }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Text1 -->
+  <div class="grid-item">
+    <div class="component text1">
+      <b>Text1: </b>
+      <p>{{ text1 }}</p>
+    </div>
+  </div>
+</div>
