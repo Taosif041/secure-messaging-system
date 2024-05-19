@@ -42,6 +42,9 @@ export class StatusService {
     this.currentIndex = key;
   }
 
+  getCurrentWords(): string {
+    return this.currentIndex;
+  }
   getCurrentIndex(): string {
     return this.currentIndex;
   }

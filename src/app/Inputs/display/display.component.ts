@@ -69,6 +69,7 @@ export class DisplayComponent implements OnInit {
     const wordsAndPunctuations = this.text2.match(/[\w]+|[^\s\w]+/g) || [];
     // Convert all to lower case
     this.allWordsText2 = wordsAndPunctuations;
+    // console.log('allWordsText2 ----> ', this.allWordsText2);
   }
 
   async fetchGeneratedText() {

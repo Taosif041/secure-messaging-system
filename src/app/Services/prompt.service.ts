@@ -10,9 +10,9 @@ export class PromptService {
   randomTheme: string;
 
   prompt1: string =
-    'I will give you 1 word. please write one short sentence using the word. The sentence should be on the following theme (not mandatory)';
-  prompt2: string = 'You can find the word here:';
-  prompt3: string = 'Use the following punctuation in a sentence: ';
+    'I will give you a word. You need to write a sentence using the word. The sentence should be on the following theme: ';
+  prompt2: string = 'The word is:';
+  prompt3: string = 'Use the following punctuation in the sentence: ';
 
   constructor(
     private geminiService: GeminiService,
