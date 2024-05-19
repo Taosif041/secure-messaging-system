@@ -1,0 +1,42 @@
+<div class="grid-container">
+  <!-- G1 Matrix -->
+  <div class="grid-item">
+    <div class="component">
+      <b>G1 Matrix: </b>
+      <div class="container matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>Matrix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let word of uniqueWordsText1">
+              <td>{{ word }}</td>
+              <td>{{ matrix_g[word].join(" ") }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unique Words -->
+  <div class="grid-item">
+    <div class="component">
+      <b>X1: </b>
+      <ul>
+        <li *ngFor="let word of uniqueWordsText1">{{ word }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Text1 -->
+  <div class="grid-item">
+    <div class="component text1">
+      <b>Text1: </b>
+      <p>{{ text1 }}</p>
+    </div>
+  </div>
+</div>

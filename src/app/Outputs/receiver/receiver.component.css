@@ -1,0 +1,36 @@
+/* receiver.component.css */
+
+/* Center the table */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  /* Style the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style the table header */
+  th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  /* Style the table rows */
+  tr {
+    border: 1px solid #ddd;
+  }
+  
+  /* Style the table cells */
+  td {
+    padding: 8px;
+    text-align: center;
+  }
+  

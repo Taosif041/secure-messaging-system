@@ -1,0 +1,9 @@
+<div>
+  <label for="decoderInput">Enter Message to Decode:</label>
+  <input type="text" id="decoderInput" [(ngModel)]="decoderInput" required>
+</div>
+<div>
+  <label for="decoderKey">Key:</label>
+  <input type="text" id="decoderKey" [(ngModel)]="decoderKey" required>
+</div>
+<button (click)="submitMessage()">Submit</button>

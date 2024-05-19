@@ -1,0 +1,66 @@
+<cdk-accordion class="example-accordion">
+  <!-- Text2 Section -->
+  <cdk-accordion-item
+    #text2MessageAccordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+  >
+    <div
+      class="example-accordion-item-header"
+      (click)="text2MessageAccordionItem.toggle()"
+    >
+      Text2
+      <span class="example-accordion-item-description">
+        Click to {{ text2MessageAccordionItem.expanded ? "close" : "open" }}
+      </span>
+    </div>
+    <div
+      class="example-accordion-item-body"
+      [style.display]="text2MessageAccordionItem.expanded ? '' : 'none'"
+    >
+      <p>{{ text2 }}</p>
+    </div>
+  </cdk-accordion-item>
+
+  <!-- OTP Section -->
+  <cdk-accordion-item
+    #sentOtpAccordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+  >
+    <div
+      class="example-accordion-item-header"
+      (click)="sentOtpAccordionItem.toggle()"
+    >
+      OTP
+      <span class="example-accordion-item-description">
+        Click to {{ sentOtpAccordionItem.expanded ? "close" : "open" }}
+      </span>
+    </div>
+    <div
+      class="example-accordion-item-body"
+      [style.display]="sentOtpAccordionItem.expanded ? '' : 'none'"
+    >
+      <p>{{ curkey }}</p>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>
+
+<div class="example-accordion-item-body">
+  <div class="container matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Matrix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let word of uniqueWordsText2">
+          <td>{{ word }}</td>
+          <td>{{ matrix_g2[word].join(" ") }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<button class="example-button" (click)="navigateToShowG1()">Next</button>
