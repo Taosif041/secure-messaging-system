@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
   gap: 10px; /* Gap between grid items */
-  margin: 10px;
+  margin: 50px;
 }
 
 .grid-item {

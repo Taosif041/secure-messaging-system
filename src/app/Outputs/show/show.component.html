@@ -42,25 +42,28 @@
       <p>{{ curkey }}</p>
     </div>
   </cdk-accordion-item>
+  <!-- Index Section -->
+  <cdk-accordion-item
+    #sentIndexAccordionItem="cdkAccordionItem"
+    class="example-accordion-item"
+  >
+    <div
+      class="example-accordion-item-header"
+      (click)="sentIndexAccordionItem.toggle()"
+    >
+      Index
+      <span class="example-accordion-item-description">
+        Click to {{ sentIndexAccordionItem.expanded ? "close" : "open" }}
+      </span>
+    </div>
+    <div
+      class="example-accordion-item-body"
+      [style.display]="sentIndexAccordionItem.expanded ? '' : 'none'"
+    >
+      <p>Index: {{ Index }}</p>
+      <p>Encrypted Index: {{ encryptedIndex }}</p>
+    </div>
+  </cdk-accordion-item>
 </cdk-accordion>
-
-<div class="example-accordion-item-body">
-  <div class="container matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Word</th>
-          <th>Matrix</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let word of uniqueWordsText2">
-          <td>{{ word }}</td>
-          <td>{{ matrix_g2[word].join(" ") }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
 <button class="example-button" (click)="navigateToShowG1()">Next</button>

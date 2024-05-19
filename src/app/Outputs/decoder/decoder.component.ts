@@ -61,6 +61,10 @@ export class DecoderComponent {
         this.statusService.setCurrentText1(found.text1);
         this.statusService.setCurrentText2(this.decoderInput);
         this.statusService.setCurrentKey(this.decoderKey);
+        this.statusService.setCurrentIndex(found.index);
+        this.statusService.setCurrentEncryptedIndex(found.encryptedIndex);
+        this.statusService.setUniqueWords(found.unique1);
+        console.log(found);
         this.router.navigate(['/show']);
       } else {
         // Handle the case where no match is found

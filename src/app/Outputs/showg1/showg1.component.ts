@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from './../../Services/data.service';
+import { MatrixService } from './../../Services/matrix.service';
 import { StatusService } from './../../Services/status.service';
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
-import {MatGridListModule} from '@angular/material/grid-list';
-
-
 
 @Component({
   selector: 'app-showg1',
   templateUrl: './showg1.component.html',
-  styleUrls: ['./showg1.component.css']
+  styleUrls: ['./showg1.component.css'],
 })
 export class Showg1Component implements OnInit {
   text1: string = '';
@@ -23,56 +22,44 @@ export class Showg1Component implements OnInit {
 
   matrix_g: { [key: string]: number[] } = {};
 
-  constructor(private statusService: StatusService, private router: Router) { }
+  constructor(
+    private statusService: StatusService,
+    private dataService: DataService,
+    private matrixService: MatrixService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // Retrieve the data from the StatusService
     this.getData();
     this.generateUniqueWords();
-    this.initializeMatrixes();
-    this.generateFormattedMessage();
-    this.encryptMessage();
-  }
-  getData(){
-    this.text1 = this.statusService.getCurrentText1();
-    this.curkey = this.statusService.getCurrentKey();
+    this.initializeMatricesAndMessages();
   }
 
-  generateUniqueWords(){
-    const messageWithoutPunctuation1 = this.text1.replace(/[^\w\s]/g, '');
-    const words1 = messageWithoutPunctuation1.split(/[\W_]+/);
-    this.allWordsText1 = words1.map(word => word.toLowerCase());
-    this.uniqueWordsText1 = Array.from(new Set(this.allWordsText1));  
+  getData() {
+    this.text1 = this.dataService.getLastMessage().message;
+    this.curkey = this.dataService.getLastMessage().key;
+    this.uniqueWordsText1 = this.statusService.getUniqueWords();
   }
-  
-  initializeMatrixes() {
-    for (let w of this.uniqueWordsText1) this.matrix_g[w] = []; 
-  
-    for (let w of this.uniqueWordsText1) {
-      for (let wi of this.allWordsText1) {
-        if (w === wi) this.matrix_g[w].push(1);
-        else this.matrix_g[w].push(0);
-      }
-    }  
+
+  generateUniqueWords() {
+    const wordsAndPunctuations = this.text1.match(/[\w]+|[^\s\w]+/g) || [];
+    // Convert all to lower case
+    this.allWordsText1 = wordsAndPunctuations;
+    this.uniqueWordsText1 = this.statusService.getUniqueWords();
+    console.log('allWordsText1 ------->', this.allWordsText1);
+    console.log('uniqueWordsText1 ------->', this.uniqueWordsText1);
+    // this.uniqueWordsText1 = Array.from(new Set(this.allWordsText1));
   }
-  
-  generateFormattedMessage() {
-    let formattedText1 = '';
-    for (let w of this.uniqueWordsText1) {
-      formattedText1 += w + " ";
-      for (let wi of this.matrix_g[w]) formattedText1 += wi + " ";
-      formattedText1 += '\n';
-    }
-    this.formattedMessageText1 = formattedText1;  
+
+  initializeMatricesAndMessages() {
+    this.matrix_g = this.matrixService.initializeMatrix(
+      this.uniqueWordsText1,
+      this.allWordsText1
+    );
   }
-  
-  encryptMessage() {
-    this.encryptedMessageText1 = CryptoJS.AES.encrypt(this.text1, this.curkey).toString();
-  }
+
   navigateToShowG1() {
     this.router.navigate(['/showg1']);
   }
-
-
 }
-

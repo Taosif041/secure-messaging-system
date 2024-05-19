@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import { DataService } from '../../Services/data.service';
 import { ValidateService } from '../../Services/validate.service';
-import { StoryService } from '../../Services/story.service';
-
-import * as CryptoJS from 'crypto-js';
-import { GeminiService } from 'src/app/Services/gemini.service';
+import { HashService } from '../../Services/hash.service';
+import { MatrixService } from '../../Services/matrix.service';
+import { PromptService } from 'src/app/Services/prompt.service';
+import { IndexingService } from 'src/app/Services/indexing.service';
+import { TextUtilityService } from 'src/app/Services/text-utility-service.service';
 
 @Component({
   selector: 'app-display',
@@ -13,163 +13,123 @@ import { GeminiService } from 'src/app/Services/gemini.service';
   styleUrls: ['./display.component.css'],
 })
 export class DisplayComponent implements OnInit {
-  header: string =
-    'write a short story of 30-50 words. keep the vibe positive. do not use newline. only use full stops, commas, and qustion marks. you must include following words:';
-  prompt: string = '';
-
   lastMessage: { message: string; key: string } = { message: '', key: '' };
 
   matrix_g: { [key: string]: number[] } = {};
-  matrix_g2: { [key: string]: number[] } = {};
 
   text1: string = '';
   text2: string = '';
-  text3: string = '';
 
   allWordsText1: string[] = [];
   allWordsText2: string[] = [];
-
   uniqueWordsText1: string[] = [];
-  uniqueWordsText2: string[] = [];
 
   formattedMessageText1: string = '';
-  formattedMessageText2: string = '';
 
-  encryptedMessageText1: string = '';
-  encryptedMessageText2: string = '';
+  encryptedIndex: string = '';
 
   uniqueWordsText1String: string = '';
-  uniqueWordsText2String: string = '';
+
+  index: string = '';
 
   constructor(
     private dataService: DataService,
     private validateService: ValidateService,
-    private geminiService: GeminiService
+    private hashService: HashService,
+    private textUtilityService: TextUtilityService,
+    private matrixService: MatrixService,
+    private promptService: PromptService,
+    private indexingService: IndexingService
   ) {}
 
   async ngOnInit() {
-    await this.generateText1();
-    this.uniqueWordsText1String = this.getUniqueWordsString(
-      this.uniqueWordsText1
-    );
-
-    this.prompt = this.header + this.uniqueWordsText1String;
-    await this.generateText();
-
-    await this.generateText2();
-
-    this.initializeMatrixes();
-    this.generateFormattedMessage();
-    this.encryptMessage();
-
-    this.uniqueWordsText2String = this.getUniqueWordsString(
-      this.uniqueWordsText2
-    );
-    this.setData();
+    await this.initializeText1();
+    await this.fetchGeneratedText();
+    await this.initializeText2();
+    await this.initializeMatricesAndMessages();
+    await this.encryptMessages();
+    await this.generateIndex();
+    await this.prepareData();
   }
 
-  async generateText1() {
-    this.lastMessage = this.dataService.getLastMessage();
+  async initializeText1() {
+    this.lastMessage = await this.dataService.getLastMessage();
     this.text1 = this.lastMessage.message;
-
-    const messageWithoutPunctuation1 = this.text1.replace(/[^\w\s]/g, '');
-    const words1 = messageWithoutPunctuation1.split(/[\W_]+/);
-    this.allWordsText1 = words1.map((word) => word.toLowerCase());
+    // Split the text into words and punctuations
+    const wordsAndPunctuations = this.text1.match(/[\w]+|[^\s\w]+/g) || [];
+    // Convert all to lower case
+    this.allWordsText1 = wordsAndPunctuations;
+    // Get unique words and punctuations
     this.uniqueWordsText1 = Array.from(new Set(this.allWordsText1));
+    // Generate unique words string
   }
 
-  async generateText2() {
-    this.text2 = this.text2.replace(/[^\w\s]/g, '');
-    this.text3 = this.text1 + ' ' + this.text2;
-
-    console.log(' text2', this.text2);
-    console.log(' text3', this.text3);
-
-    const messageWithoutPunctuation2 = this.text3.replace(/[^\w\s]/g, '');
-    const words2 = messageWithoutPunctuation2.split(/[\W_]+/);
-    this.allWordsText2 = words2.map((word) => word.toLowerCase());
-    this.uniqueWordsText2 = Array.from(new Set(this.allWordsText2));
+  async initializeText2() {
+    // Split the combined text into words and punctuations
+    const wordsAndPunctuations = this.text2.match(/[\w]+|[^\s\w]+/g) || [];
+    // Convert all to lower case
+    this.allWordsText2 = wordsAndPunctuations;
   }
 
-  initializeMatrixes() {
-    for (let w of this.uniqueWordsText1) this.matrix_g[w] = [];
-
-    for (let w of this.uniqueWordsText1) {
-      for (let wi of this.allWordsText1) {
-        if (w === wi) this.matrix_g[w].push(1);
-        else this.matrix_g[w].push(0);
-      }
-    }
-
-    for (let w of this.uniqueWordsText2) this.matrix_g2[w] = [];
-
-    for (let w of this.uniqueWordsText2) {
-      for (let wi of this.allWordsText2) {
-        if (w === wi) this.matrix_g2[w].push(1);
-        else this.matrix_g2[w].push(0);
-      }
+  async fetchGeneratedText() {
+    try {
+      this.text2 = await this.promptService.fetchGeneratedText(
+        this.uniqueWordsText1
+      );
+      // console.log('text2 -------------->      ', this.text2);
+      // console.log(this.text2);
+    } catch (error) {
+      console.error('Error generating text:', error);
     }
   }
 
-  generateFormattedMessage() {
-    let formattedText1 = '';
-    for (let w of this.uniqueWordsText1) {
-      formattedText1 += w + ' ';
-      for (let wi of this.matrix_g[w]) formattedText1 += wi + ' ';
-      formattedText1 += '\n';
-    }
-    this.formattedMessageText1 = formattedText1;
-
-    let formattedText2 = '';
-    for (let w of this.uniqueWordsText2) {
-      formattedText2 += w + ' ';
-      for (let wi of this.matrix_g2[w]) formattedText2 += wi + ' ';
-      formattedText2 += '\n';
-    }
-    this.formattedMessageText2 = formattedText2;
+  async initializeMatricesAndMessages() {
+    this.matrix_g = await this.matrixService.initializeMatrix(
+      this.uniqueWordsText1,
+      this.allWordsText1
+    );
+    this.formattedMessageText1 =
+      await this.matrixService.generateFormattedMessage(
+        this.uniqueWordsText1,
+        this.matrix_g
+      );
   }
 
-  encryptMessage() {
-    this.encryptedMessageText1 = CryptoJS.AES.encrypt(
-      this.text1,
+  async encryptMessages() {
+    // Encrypt text1 and text2 using HashService
+    this.encryptedIndex = await this.hashService.encrypt(
+      this.index,
       this.lastMessage.key
-    ).toString();
-    this.encryptedMessageText2 = CryptoJS.AES.encrypt(
-      this.text2,
-      this.lastMessage.key
-    ).toString();
+    );
   }
 
-  setData() {
-    if (this.text2.length == 0) {
+  async prepareData() {
+    if (this.text2.length === 0) {
       this.text2 = 'invalid text';
     }
+
     const dataSet = {
       text1: this.text1,
       key: this.lastMessage.key,
-      encrypted1: this.encryptedMessageText1,
+      unique1: this.uniqueWordsText1,
+      encryptedIndex: this.encryptedIndex,
       text2: this.text2,
-      encrypted2: this.encryptedMessageText2,
-      uniqueString1: this.uniqueWordsText1String,
-      uniqueString2: this.uniqueWordsText2String,
+      index: this.index,
     };
+
     console.log(dataSet);
     this.validateService.addDataSet(dataSet);
   }
 
-  getUniqueWordsString(uniqueWords: string[]): string {
-    return uniqueWords.join(', ');
+  async generateIndex() {
+    // Generate index string using IndexingService
+    this.index = await this.indexingService.generateIndex(
+      this.allWordsText1,
+      this.allWordsText2
+    );
   }
 
-  async generateText() {
-    try {
-      this.text2 = await this.geminiService.generateText(this.prompt);
-      console.log(this.prompt);
-      // console.log(this.text1);
-      // console.log(this.text2);
-      // console.log(this.text3);
-    } catch (error) {
-      console.error('Error generating text:', error);
-    }
+  countWords(text: string): number {
+    return text.trim().split(/\s+/).length;
   }
 }
